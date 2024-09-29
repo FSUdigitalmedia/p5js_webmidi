@@ -49,7 +49,7 @@ function setup() {
   slider2d = createSlider2d("Slider2d", 10, 100, 175, 175, 0, 127, 0, 127);
 }
 
-// runs once per frame
+// draw runs once per frame
 function draw() {
   background(255);
   drawGui();

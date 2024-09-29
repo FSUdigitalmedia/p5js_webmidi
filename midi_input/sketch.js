@@ -12,47 +12,37 @@ function setup() {
   createCanvas(400, 400);
   rectMode(CENTER);
 
-  // try to setup WebMIDI and call 
-  // onMIDISuccess() if successful
-  // or onMidiFailure() if unsuccessful
-  if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess({
-        sysex: false
-    }).then(onMIDISuccess, onMIDIFailure);
-  } else {
-    // this is if the browser doesn't have any clue about WebMIDI
-    alert("No MIDI support in your browser.");
-  }
+  // try to setup WebMIDI and start listening for messages
+  navigator.requestMIDIAccess()
+  .then(function(midiAccess) {
+
+    let inputs = midiAccess.inputs.values();
+    // loop over all available input devices and listen for any MIDI input
+    for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
+      // each time there is a MIDI message call the onMIDIMessage(message) function
+      input.value.onmidimessage = onMIDIMessage;
+      console.log("Found: " + input.value.name);
+    }
+
+  })
+  .catch(function(error) {
+    console.error("Error accessing MIDI devices");
+    //console.error(error)
+  });
+
 }
 
+// draw runs once per frame
 function draw() {
   background(255);
   fill(boxGray);
   square(width/2,height/2,boxSize);
 }
 
-// onMIDISuccess is called if WebMIDI was able to be accessed
-// It sets onMIDIMessage as the function to handle incoming messages
-function onMIDISuccess(midiAccess) {
-    let midi = midiAccess; // this is our raw MIDI data, inputs, outputs, and sysex status
-    let inputs = midi.inputs.values();
-    // loop over all available input devices and listen for any MIDI input
-    for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
-        // each time there is a MIDI message call the onMIDIMessage(message) function
-        input.value.onmidimessage = onMIDIMessage;
-        console.log("Found: " + input.value.name);
-    }
-}
-
-// onMidiFailure is called if WebMIDI setup failed
-function onMIDIFailure(error) {
-    console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + error);
-}
-
 // onMIDIMessage is called for each new incoming MIDI message
 function onMIDIMessage(message) {
     let data = message.data; // data now contains the message data (eg: command, channel, note, velocity, etc)
-    // data is an array (see https://fmslogo.sourceforge.io/manual/midi-table.html)
+    // data is a 3 item array (see https://fmslogo.sourceforge.io/manual/midi-table.html)
     
     // ex 1: for a "note on" message... 
     //  data[0] = 144 (aka the "Note On" command)
