@@ -1,9 +1,9 @@
-// A template repo with two p5.js MIDI examples
-// This example shows how to get MIDI messages from MIDI controllers
-// Both examples could easily be combined
-// 2024 github.com/rahji
+// p5js_webmidi is a template repo with three p5.js MIDI examples
 
+// This example shows how to get MIDI messages from MIDI controllers
 // Adapted from: https://jsfiddle.net/KeithMcMillenInstruments/zma6pzt9
+
+// 2024 github.com/rahji
 
 let boxSize = 100;
 let boxGray = 125;

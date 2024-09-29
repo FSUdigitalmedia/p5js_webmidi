@@ -1,6 +1,5 @@
-// A template repo with two p5.js MIDI examples
+// A template repo with three p5.js MIDI examples
 // This example shows how to send MIDI messages to a MIDI synth.
-// Both examples could easily be combined.
 // 2024 github.com/rahji
 
 let outputDevice; // will reference the first available MIDI output device
