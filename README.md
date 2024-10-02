@@ -8,7 +8,7 @@ This repo contains some examples of how to communicate via MIDI using p5.js. The
 
 ## Communicating via MIDI on the Same Computer
 
-To talk MIDI between two pieces of software on the same computer, you'll need to set up a virtual MIDI device using your operating system. On MacOS, I believe you can do this using [Audio MIDI Setup](https://support.apple.com/guide/audio-midi-setup/set-up-midi-devices-ams875bae1e0/mac). In Windows, you'll probably want to download and install [LoopBe1](https://www.nerds.de/en/loopbe1.html)
+To talk MIDI between two pieces of software on the same computer, you'll need to set up a virtual MIDI device using your operating system. On MacOS, I believe you can do this using [these instructions](https://help.ableton.com/hc/en-us/articles/209774225-Setting-up-a-virtual-MIDI-bus#Mac). In Windows, you'll probably want to download and install [LoopBe1](https://www.nerds.de/en/loopbe1.html)
 
 ## See Also
 
